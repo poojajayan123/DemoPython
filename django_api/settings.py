@@ -69,24 +69,10 @@ WSGI_APPLICATION = 'django_api.wsgi.application'
 
 DATABASES = {
         'default': {
-            'ENGINE': 'djongo',
-            'ENFORCE_SCHEMA': True,
-            'NAME': 'ITI',
-            'HOST': 'mongodb://root:root@ds259144.mlab.com:59144/ITI',
-
-            'USER': 'root',
-            'PASSWORD': 'root',
-            'AUTH_SOURCE': 'Proxima',
-            'AUTH_MECHANISM': 'SCRAM-SHA-1',
-            'REPLICASET': 'replicaset',
-            'SSL': 'ssl',
-            'SSL_CERTFILE': 'ssl_certfile',
-            'SSL_CA_CERTS': 'ssl_ca_certs',
-            'READ_PREFERENCE': 'read_preference'
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
-
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
