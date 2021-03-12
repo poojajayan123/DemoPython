@@ -1,5 +1,6 @@
 import os
 from six.moves import urllib
+from pymongo import read_preferences
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6-p%08h$s26t7=j!&mjumodqk)_=)*v@c6)4%q1i47fzr7@tsb'
@@ -86,22 +87,23 @@ WSGI_APPLICATION = 'django_api.wsgi.application'
 
 MONGODB_DATABASES = {
     'default' : {
-        'NAME'  : 'Proxima',
+        'MONGODB_NAME'  : 'Proxima',
+        
     }
 }
-# SESSION_ENGINE = 'mongoengine.django.sessions'
 
-# _MONGODB_USER = 'root'
-# _MONGODB_PASSWD = 'root'
-# _MONGODB_HOST = 'localhost'
-# _MONGODB_NAME = 'Proxima'
-# _MONGODB_DATABASE_HOST = 'mongodb+srv://root:' + urllib.parse.quote_plus('root') + '@iti.dbmyx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+import mongoengine
+from mongoengine import connect
+#SESSION_ENGINE = 'mongoengine.django.sessions'
+AUTHENTICATION_BACKENDS = (
+       'mongoengine.django.auth.MongoEngineBackend',
+        )
+_MONGODB_NAME = 'Proxima'
+#DEFAULT_CONNECTION_NAME = connect('Proxima')
+_MONGODB_DATABASE_HOST = 'mongodb+srv://root:' + urllib.parse.quote_plus('root') + '@iti.dbmyx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
-# mongoengine.connect(_MONGODB_NAME, host=_MONGODB_DATABASE_HOST)
+mongoengine.connect(_MONGODB_NAME, host=_MONGODB_DATABASE_HOST)
 
-# AUTHENTICATION_BACKENDS = (
-#     'mongoengine.django.auth.MongoEngineBackend',
-# )
 DATABASES = {
        'default': {
            'ENGINE': 'djongo',
